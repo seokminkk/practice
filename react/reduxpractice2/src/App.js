@@ -10,7 +10,7 @@ const dummyData=[
 ]
 function App() {
   const dispatch=useDispatch();
-  const userinfo=useSelector(state=>state.userinfo)
+  const userinfo=useSelector(state=>state.plus.userinfo)
 
 useEffect(()=>{
   setting()
@@ -26,11 +26,11 @@ const add=()=>{
 
   return (
     <div>
-       유저정보{userinfo.map(el=>{
+       유저정보{userinfo?.map(el=>{
         return(
-          <div key={el.name}>
-            {el.name}
-            {el.age}
+          <div key={el?.name}>
+            {el?.name}
+            {el?.age}
             
           </div>
         )
