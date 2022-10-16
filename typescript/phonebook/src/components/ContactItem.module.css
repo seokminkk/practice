@@ -1,0 +1,13 @@
+.container{
+  display: flex;
+  
+}
+
+.profile_img{
+  width: 50px;
+}
+
+.textContainer{
+  display: flex;
+  flex-direction: column;
+}
