@@ -77,3 +77,104 @@ function rest(...args: string[]|number[]) {}
 const tuple: [string, number] = ['1', 1];
 tuple[0] = 'hello';
 tuple.push('hello');
+
+//이넘enum
+// 위에서부터 0123 
+
+const enum EDirection {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+ 
+
+//as const 그값을 그대로쓰겟다. 
+const ODirection = {
+  Up: 0,
+  Down: 1,
+  Left: 2,
+  Right: 3,
+} as const;
+
+ //이넘없이할려면 typeof keyof 써야함
+
+//  obj 는 typeof 
+// It requires an extra line to pull out the keys
+type Direction = typeof ODirection[keyof typeof ODirection];
+function run(dir: Direction) {}
+function walk(dir: EDirection) {}
+walk(EDirection.Left);
+run(ODirection.Right);
+
+const obj2={a:`123`, b:'je',c: 'word'} as const
+
+// 객체를 타입으로 쓰고싶으면 
+// type key=obj2; 이렇게 쓰면 typeof쓰라고 알려줌
+type key= typeof obj2;
+// 여기서 abc라는 키값만뽑고싶으면keyof씀
+type key1= keyof typeof obj2;
+
+// 밸류들의 타입들을가져오고싶으면
+type value= typeof obj2[keyof typeof obj2]
+// as const를해줘야 엄격하게 타입설정되서 밸류들이 string이 아니라 '123','je','word'가나옴
+
+// function add3(x: string | number, y: string | number): string | number { return x + y }
+// 안되는코드임 add3은 타입이 결과값이 string|number 하면 숫자만 대입햇을때 문자열함수를못씀
+// add3(1, 2)
+// add3('1', '2')
+// add3(1, '2')
+
+type A = {
+    a: string;
+}
+type B = {
+    b: string;
+}
+
+
+
+const aaa: A | B = { a: 'hello', b: 'world' };
+// 유니어 타입은 한개만 만족해도됨
+const bbb: A & B = { a: 'hello', b: 'world' };
+// intersection 타입은 모두만족해야함 
+
+
+
+type Animal ={breath:true};
+type Mamal =Animal &{eat:true};
+type Human =Mamal &{think:true}
+
+const seokmin: Human ={breath:true,eat:true,think:true}
+
+
+
+// interface끼리는 서로 합쳐짐.
+interface C { a: string }
+interface C { b: string }
+const obj1: C = { a: 'hello', b: 'world' }
+
+
+// type 은 안합쳐짐 에러남 
+// type D = { a: string }
+// type D = { b: string }
+// const obj5: D = { a: 'hello', b: 'world' }
+
+// 인터페이스는 여러번선언가능한데 타입은 같은거또선언하면 에러남
+
+
+interface E{
+  breath:true
+}
+interface F extends E{
+ eat:true
+}
+const you:F ={ breath:true,eat:true}
+
+
+// interface랑 type이랑 합쳐질수도 있음
+
+// interface F extends Human{
+//   eat:true
+// }
+// const you:F ={ breath:true,eat:true, think:true}
