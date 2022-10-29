@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, FunctionComponent,MouseEvent } from 'react';
+import React, { ChangeEvent, FC, FormEvent, FunctionComponent,MouseEvent , Component} from 'react';
 import { useState, useCallback, useRef } from 'react';
 
 
@@ -18,7 +18,7 @@ title:string,
 //FC=FunctionComponent
 const WordRelay:FC<P> = (props) => {
   // props.name
-    const [word, setWord] = useState('제로초');
+    const [word, setWord] = useState('seomon');
     const [value, setValue] = useState('');
     const [result, setResult] = useState('');
     /////////////////////////////////////////////////////
